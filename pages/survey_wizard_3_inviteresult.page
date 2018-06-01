@@ -1,0 +1,33 @@
+<apex:page controller="SurveyWizardController" >
+<apex:form >
+  <!-- Begin Default Content REMOVE THIS cache="true" contenttype="application/x-excel#filename.xls" showheader="false"-->
+  <!--<h1>Survey Invites</h1>-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+</head>
+
+  <apex:sectionHeader title="Step 3 - Nomination status" subtitle="Your Contacts are Nominated"/>
+  <apex:pageblock >
+  <apex:pageblocksection columns="1" title="Nomination Status" >
+  <apex:outputpanel id="Contactlist"> 
+       <apex:pageBlockTable id="myTable"  value="{!selectedContacts}" var="cCon" rendered="{!NOT(ISNULL(selectedContacts))}">     
+            <apex:column headervalue="Acccount Name">
+                    <apex:outputtext value="{!cCon.con.Account.Name}"/> 
+           </apex:column>  
+            <apex:column headervalue="Contact Name">
+                    <apex:outputtext value="{!cCon.con.Name}"/> 
+           </apex:column>  
+            <apex:column headervalue="Job Title">
+                    <apex:outputtext value="{!cCon.con.Title}"/> 
+           </apex:column> 
+             
+            </apex:pageBlockTable>
+    <br/>
+    <br/> 
+   </apex:outputpanel>
+   
+</apex:pageblocksection>
+</apex:pageblock>
+</apex:form>
+
+</apex:page>

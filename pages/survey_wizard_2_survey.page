@@ -1,0 +1,34 @@
+<apex:page controller="SurveyWizardController" >
+<!-- Javascript function to check all rows in the table -->
+
+<!-- End of Javascript function -->
+<apex:form >
+
+<apex:sectionHeader title="Step 2 - select survey" subtitle="Satmetrix Survey "/>
+<apex:pageblock >
+
+<!-- End of colored box div -->
+    <br/>
+<!-- Display error message -->
+<apex:pagemessage strength="2" title="Error!!" severity="error" detail="Please select a contact or enter Department to proceed" rendered="{!errormsg}"/>
+<!-- End of error message -->
+<!-- Display search results -->
+
+<apex:pageblocksection columns="1" title="Select Survey" rendered="{!NOT(ISNULL(contactList))}" >
+    <apex:outputpanel id="Surveys">        
+           <apex:selectRadio value="{!strSurveyId}" id="titleDisplayRadio" layout="pageDirection">
+            <apex:selectOptions value="{!theList}">
+   
+</apex:selectOptions>
+</apex:selectRadio>
+    
+    </apex:outputpanel>
+</apex:pageblocksection>
+
+<!-- End of search results -->
+<!-- Commandbutton to proceed to next screen action="{!processSelected}"  onClick="window.open('/apex/Success');" --> 
+ <div style="position:relative;left:600px;">  
+    <apex:commandButton value="Next"  action="{!step3}"   /> 
+     <apex:commandbutton value="Cancel" action="{!Cancel}"/>
+  </div><!-- End of Commandbutton -->
+</apex:pageblock></apex:form></apex:page>

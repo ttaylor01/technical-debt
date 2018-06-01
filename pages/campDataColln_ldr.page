@@ -1,0 +1,3 @@
+<apex:page controller="SurveyWizardController" action="{!showDataCollections}" >
+<meta HTTP-EQUIV="REFRESH" content="0; url=/apex/campaignDataCollections"/> 
+</apex:page>
