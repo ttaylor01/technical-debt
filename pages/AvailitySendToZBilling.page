@@ -1,0 +1,47 @@
+<apex:page standardController="zqu__Quote__c" extensions="AvailitySendToZBilling">   
+    <apex:form >
+        <apex:pageMessages id="message"/>
+        <apex:pageBlock title="Quote Details">
+            <apex:pageBlockButtons id="operations">
+                <apex:commandButton value="Send to Z-Billing" action="{!send}" reRender="operations, message"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Account Identifiers" columns="2" rendered="{!quote.zqu__Opportunity__r.Type == 'HeW' && quote.zqu__ZuoraAccountID__c == null}">
+                <apex:pageblocksectionitem >
+                    <apex:outputlabel value="Account Number" for="accountnumber"/>
+                    <apex:outputpanel layout="block" styleClass="requiredInput">
+                        <apex:outputpanel layout="block" styleClass="requiredBlock"/>
+                        <apex:selectList size="1" id="accountnumber" value="{!accountNumber}" label="Account Number">
+                            <apex:selectOptions value="{!accountIds}"/>
+                        </apex:selectList>
+                    </apex:outputpanel>
+                </apex:pageblocksectionitem>
+                <apex:pageblocksectionitem >
+                    <apex:outputlabel value="Parent Account Number" for="parentaccountnumber"/>
+                    <apex:selectList size="1" id="parentaccountnumber" value="{!parentNumber}" label="Parent Account Number">
+                        <apex:selectOptions value="{!parentIds}"/>
+                    </apex:selectList>
+                </apex:pageblocksectionitem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Basic Information" columns="2" rendered="{!record.zqu__SubscriptionType__c == 'New Subscription'}">
+                <apex:repeat value="{!$ObjectType.zqu__Quote__c.FieldSets.PreviewBasicInfoSet}" var="previewBasicInfoField">
+                <apex:outputField value="{!record[previewBasicInfoField]}"/>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Contact Information" columns="2" rendered="{!record.zqu__SubscriptionType__c == 'New Subscription'}">
+                <apex:repeat value="{!$ObjectType.zqu__Quote__c.FieldSets.PreviewContactSet}" var="previewContactField">
+                <apex:outputField value="{!record[previewContactField]}"/>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Subscription Information" columns="2">
+                <apex:repeat value="{!IF(record.zqu__SubscriptionType__c == 'New Subscription',$ObjectType.zqu__Quote__c.FieldSets.PreviewSubscriptionSet,$ObjectType.zqu__Quote__c.FieldSets.BasicInfoForAmendAndRenewalSet)}" var="previewSubscriptionField">
+                <apex:outputField value="{!record[previewSubscriptionField]}"/>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            <!--  
+            <apex:pageBlockSection title="Offers" columns="1">
+            	<c:ShowOffers id="offers" quoteId="{!zqu__Quote__c.Id}" chargeGroups="{!chargeGroupList}" allowEditInComponent="false"/>
+            </apex:pageBlockSection>
+            -->
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

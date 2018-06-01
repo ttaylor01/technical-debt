@@ -1,0 +1,27 @@
+<apex:page standardController="Case" extensions="CaseCloseWithSurvey">
+	<apex:sectionHeader subtitle="Close Case"/>
+	<apex:form >
+		<apex:pageblock title="Case Edit">
+			<apex:PageMessages id="message"/>
+			<apex:pageblocksection title="Case Information" collapsible="false" columns="1">
+                <apex:pageblocksectionitem >
+                    <apex:outputlabel value="Status" for="status"/>
+                    <apex:outputpanel layout="block" styleClass="requiredInput">
+                        <apex:outputpanel layout="block" styleClass="requiredBlock"/>
+                        <apex:selectList size="1" id="status" value="{!cs.Status}" label="Status">
+                            <apex:selectOptions value="{!statusOptions}"/>
+                        </apex:selectList>
+                    </apex:outputpanel>
+                </apex:pageblocksectionitem>
+				<apex:pageblocksectionitem >
+					<apex:outputlabel value="Internal Comment" for="Comment"/>
+					<apex:inputtextarea id="Comment" value="{!comment.CommentBody}" cols="100" rows="5"/>
+				</apex:pageblocksectionitem>
+			</apex:pageblocksection>
+			<apex:pageblockButtons >
+				<apex:commandbutton action="{!doSave}" value="Save"/>
+				<apex:commandbutton action="{!cancel}" value="Cancel"/>
+			</apex:pageblockButtons>
+		</apex:pageblock>
+	</apex:form>
+</apex:page>
