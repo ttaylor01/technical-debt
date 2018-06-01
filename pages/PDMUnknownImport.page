@@ -1,0 +1,46 @@
+<apex:page controller="PDMUnknownImport">
+    <style>
+        .smallInput { width: 100px; }
+        .mediumInput { width: 250px; }
+        .longInput { width: 400px; }
+    </style>
+    <head>
+        <apex:includeScript value="{!URLFOR($Resource.pkb_mobile, 'js/libs/jquery/jquery-min.js')}"/>
+    </head>
+
+    <apex:form >
+        <apex:pagemessages />
+
+        <apex:pageBlock title="Upload PDM Unknown CSV File">
+            <apex:pageBlockSection >
+                <apex:outputText style="font-style:italic" value="Recommended maximum file size:  1000 rows" />
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="4">
+                <apex:inputFile value="{!csvFileBody}"  filename="{!csvAsString}"/>
+                <apex:commandButton value="Import File" action="{!importCSVFile}"/>
+                <apex:commandButton value="Clear Import" action="{!clearImport}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:pageBlock title="PDM Cases to Import" rendered="{!pdmCases.size>0}">
+            <apex:pageBlockSection columns="1">
+                <apex:pageblocksectionitem >
+                    <apex:outputlabel value="Payer Name" for="payerName"/>
+                    <apex:outputpanel layout="block" styleClass="requiredInput">
+                        <apex:outputpanel layout="block" styleClass="requiredBlock"/>
+                        <apex:inputText id="payerName" html-readonly="true" value="{!payerName}" styleClass="mediumInput"/>&nbsp;&nbsp;
+                        <apex:commandButton value="Import Cases" action="{!importCases}" disabled="{!caseListIsEmpty}"/>
+                        &nbsp;&nbsp;Records to Import:&nbsp;&nbsp;<apex:outputText value="{!numImported}"/>
+                        &nbsp;&nbsp;Duplicate Records:&nbsp;&nbsp;<apex:outputText value="{!numDuplicated}"/>
+                    </apex:outputpanel>
+                </apex:pageblocksectionitem>
+            </apex:pageBlockSection>
+            <apex:pageblocktable value="{!pdmCases}" var="c">
+                <apex:column width="20%" headerValue="Provider ID" value="{!c.Provider_ID__c}"/>
+                <apex:column width="40%" headerValue="Provider Name" value="{!c.Provider_Name__c}"/>
+                <apex:column width="20%" headerValue="Tax ID" value="{!c.Tax_ID__c}"/>
+                <apex:column width="20%" headerValue="NPI" value="{!c.NPI_Identifier__c}"/>
+            </apex:pageblocktable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
