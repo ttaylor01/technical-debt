@@ -1,0 +1,17 @@
+<apex:page StandardController="zqu__Quote__c" extensions="Quote_Edit_Controller">
+    <apex:form >
+        <zqu:PropertyComponent options="{!theOptions}" saveButtonLabel="Save" >
+            <apex:outputPanel rendered="{!IF(field.name == 'zqu__InvoiceOwnerName__c', true, false)}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel style="padding-right:8px; float: left; width: {!IF(fieldSet.isSingleColumn, '18%','36%')};"
+                        styleClass="labelCol">
+                        <apex:outputLabel style="margin-right: 8px;">{!field.label}</apex:outputLabel>
+                    </apex:outputPanel>
+                    <apex:outputPanel style="float: left;">
+                        <zqu:LookupComponent options="{!invoiceOwnerOptions}" isRequired="{!field.isRequired}" />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+            </apex:outputPanel>
+        </zqu:PropertyComponent>
+    </apex:form>
+</apex:page>
