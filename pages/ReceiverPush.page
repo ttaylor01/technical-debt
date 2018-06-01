@@ -1,0 +1,16 @@
+<apex:page controller="ReceiverProdPushController">
+    <apex:pageBlock title="Receiver Implementation Pushes">
+        <apex:pageBlockTable value="{!RecRoutPushes}" var="o">
+            <apex:column headerValue="ReceiverRouting">
+               <apex:outputLink value="https://na4.salesforce.com/{!o.Receiver_Routing__r.Id}">{!o.Receiver_Routing__r.Name}</apex:outputLink>
+            </apex:column>
+            <apex:column headerValue="ReceiverPush">
+                <apex:outputLink value="https://na4.salesforce.com/{!o.Id}">{!o.Name}</apex:outputLink>
+            </apex:column>
+            <apex:column value="{!o.Receiver_Routing__r.Receiver_Mailbox_es__c}"/>
+            <apex:column value="{!o.Push_Time__c}"/>
+            <apex:column value="{!o.Push_Complete__c}"/>
+            <apex:column value="{!o.Environment__c}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>
