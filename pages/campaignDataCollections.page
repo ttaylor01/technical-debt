@@ -1,0 +1,20 @@
+<apex:page controller="SurveyWizardController" action="{!showDataCollections}">
+<apex:form >
+<apex:sectionHeader title="Select a Survey" subtitle="Satmetrix Survey "/>
+
+<apex:pageblock >
+    <br/>
+<apex:pageblocksection columns="1" title="Select Survey">
+    <apex:outputpanel id="Surveys">        
+           <apex:selectRadio value="{!strSurveyId}" id="titleDisplayRadio" layout="pageDirection">
+           <apex:selectOptions value="{!theList}" >
+</apex:selectOptions>
+</apex:selectRadio>
+</apex:outputpanel>
+</apex:pageblocksection>
+
+<div style="position:relative;left:600px;">  
+  <apex:commandButton value="Next" action="{!updateCampaign}"  />
+</div>
+</apex:pageblock></apex:form>
+</apex:page>
